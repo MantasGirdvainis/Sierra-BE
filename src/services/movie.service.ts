@@ -1,5 +1,5 @@
 import axios from "axios";
-import { convertToMovie } from "../converters/movie.converter";
+import { convertToMovie, convertToMovieDetails  } from "../converters/movie.converter";
 
 let moviesCahce: Movie[] | undefined;
 let totalPagesCache: number | undefined;
@@ -24,4 +24,11 @@ const getMovies = async (): Promise<Movies> => {
       };
 };
 
-export {getMovies};
+const getMovie = async (movieId: number): Promise<MovieDetails> => {
+    const { data }= await axios.get<TmdbMovieDetails>(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`);
+    
+    return convertToMovieDetails(data)
+    
+}
+
+export {getMovies, getMovie};
