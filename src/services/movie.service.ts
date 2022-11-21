@@ -1,6 +1,12 @@
 import axios from "axios";
 import { convertToMovie, convertToMovieDetails  } from "../converters/movie.converter";
 
+interface MovieDetailsCache {
+    [key: number]: MovieDetails
+}
+
+const movieDetailsCahce: MovieDetailsCache = {}
+
 let moviesCahce: Movie[] | undefined;
 let totalPagesCache: number | undefined;
 
@@ -25,9 +31,16 @@ const getMovies = async (): Promise<Movies> => {
 };
 
 const getMovie = async (movieId: number): Promise<MovieDetails> => {
+    if (movieDetailsCahce[movieId]) {
+        return movieDetailsCahce[movieId];
+    }
+
     const { data }= await axios.get<TmdbMovieDetails>(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`);
-    
-    return convertToMovieDetails(data)
+
+    const movie = convertToMovieDetails(data)
+    movieDetailsCahce[movie.movieId] = movie
+
+    return movie
     
 }
 
