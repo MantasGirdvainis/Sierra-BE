@@ -8,26 +8,26 @@ interface MovieDetailsCache {
 
 const movieDetailsCahce: MovieDetailsCache = {}
 
-let moviesCahce: Movie[] | undefined;
+let moviesCahce: Record<number, Movie []>
 let totalPagesCache: number | undefined;
 let pageCache: number
 
 const getMovies = async (page: number): Promise<Movies> => {
 
-    if (!moviesCahce) {
-        console.log(page)
+    if (!moviesCahce[page]) {
         const { data } = await axios.get<TmdbMovies>( 
             `https://api.themoviedb.org/3/discover/movie?page=${page}sort_by=popularity.desc&page=1&vote_count.gte=1000&api_key=${process.env.API_KEY}`,
         ); 
         
-        moviesCahce = data.results.map(convertToMovie);
+        moviesCahce[page] = data.results.map(convertToMovie);
         totalPagesCache = data.total_pages;
         pageCache = page;
+
     }
 
     return {
         page: pageCache | 1,
-        movies: moviesCahce || [],
+        movies: moviesCahce[page] || [],
         totalPages: totalPagesCache || 1
       };
 };
