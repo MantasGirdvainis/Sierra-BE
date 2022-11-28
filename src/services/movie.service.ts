@@ -1,31 +1,33 @@
 import axios from "axios";
 import { convertToMovie, convertToMovieDetails  } from "../converters/movie.converter";
 
+
 interface MovieDetailsCache {
     [key: number]: MovieDetails
 }
 
 const movieDetailsCahce: MovieDetailsCache = {}
 
-let moviesCahce: Movie[] | undefined;
+let moviesCahce: Record<number, Movie []>
 let totalPagesCache: number | undefined;
+let pageCache: number
 
-const getMovies = async (): Promise<Movies> => {
+const getMovies = async (page: number): Promise<Movies> => {
 
-    if (!moviesCahce) {
-
-        const { data } = await axios.get<TmdbMovies>(
-            `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=1&vote_count.gte=1000&api_key=${process.env.API_KEY}`,
-        );
+    if (!moviesCahce[page]) {
+        const { data } = await axios.get<TmdbMovies>( 
+            `https://api.themoviedb.org/3/discover/movie?page=${page}sort_by=popularity.desc&page=1&vote_count.gte=1000&api_key=${process.env.API_KEY}`,
+        ); 
         
-        moviesCahce = data.results.map(convertToMovie);
+        moviesCahce[page] = data.results.map(convertToMovie);
         totalPagesCache = data.total_pages;
+        pageCache = page;
+
     }
-    
 
     return {
-        page: 1,
-        movies: moviesCahce || [],
+        page: pageCache | 1,
+        movies: moviesCahce[page] || [],
         totalPages: totalPagesCache || 1
       };
 };

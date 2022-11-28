@@ -4,7 +4,13 @@ import * as movieService from '../services/movie.service';
 
 const getMovies = async (_req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
   try {
-    res.json(await movieService.getMovies());
+     let page:number = parseInt(_req.query.page as string)
+    
+    if (!page) {
+      page = 1
+    }
+    
+    res.json(await movieService.getMovies(page));
   } catch (err) {
     next(err);
   }
