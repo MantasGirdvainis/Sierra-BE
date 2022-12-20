@@ -1,5 +1,4 @@
-
-const validate = (title: string):boolean => {
+let validate = (title: string): boolean => {
 
   return /[a-zA-Z\d\s\-.]/.test(title)
 };

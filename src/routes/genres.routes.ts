@@ -1,9 +1,9 @@
 import express from 'express'
 
-import { getGenre } from '../controllers/genre.controller'
+import { getGenres } from '../controllers/genres.controller'
 
 const router = express.Router();
 
-router.get('/', getGenre);
+router.get('/', getGenres);
 
 export default router;

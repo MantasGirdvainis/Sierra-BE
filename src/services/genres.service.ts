@@ -1,18 +1,18 @@
 import axios from "axios";
 
-let genreCache: Genre;
+let genresCache: Genre;
 
-const getGenre = async (): Promise<Genre> => {
+const getGenres = async (): Promise<Genre> => {
    
-    if (!genreCache) {
+    if (!genresCache) {
 
         const { data } =  await axios.get<Genre>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`);
-        genreCache = data
+        genresCache = data
 
     };
 
-    return genreCache
+    return genresCache
 
 };
 
-export { getGenre };
+export { getGenres };
