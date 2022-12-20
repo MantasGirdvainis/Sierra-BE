@@ -55,8 +55,6 @@ const searchMoviesByTitle = async (title: any, page:number): Promise<Movies> => 
         movies,
         totalPages: moviesTotalPages
     }
-    
-
 }
 
 export {getMovies, getMovie, searchMoviesByTitle};
