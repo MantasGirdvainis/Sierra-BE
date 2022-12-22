@@ -14,3 +14,4 @@ const getSortOptions = async (_req: express.Request, res: express.Response, next
 };
 
 export { getSortOptions };
+
