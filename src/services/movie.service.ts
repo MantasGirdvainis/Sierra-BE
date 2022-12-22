@@ -57,8 +57,8 @@ const searchMoviesByTitle = async (title: any, page: number): Promise<Movies> =>
     };
 };
 
-const searchMoviesByGenres = async (genres: any, page: number): Promise<Movies> => {
-    const { data } = await axios.get<TmdbMovies>(`https://api.themoviedb.org/3/discover/movie?with_genres=${genres}&page=${page}&vote_count.gte=1000&api_key=${process.env.API_KEY}`)
+const searchMovies = async (page: number, genres = '', sort = 'original_title.asc'): Promise<Movies> => {
+    const { data } = await axios.get<TmdbMovies>(`https://api.themoviedb.org/3/discover/movie?sort_by=${sort}&with_genres=${genres}&page=${page}&vote_count.gte=1000&api_key=${process.env.API_KEY}`)
 
     const movies: Movie[] = data.results.map(convertToMovie)
     const moviesTotalPages = data.total_pages
@@ -68,6 +68,7 @@ const searchMoviesByGenres = async (genres: any, page: number): Promise<Movies> 
         movies,
         totalPages: moviesTotalPages
     };
+
 };
 
-export { getMovies, getMovie, searchMoviesByTitle, searchMoviesByGenres };
+export { getMovies, getMovie, searchMoviesByTitle, searchMovies };
