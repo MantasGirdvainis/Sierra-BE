@@ -17,10 +17,6 @@ const sortOptionsList = [
     }
 ]
 
-const getSortOptions = () => {
-
-    return sortOptionsList;
-
-};
+const getSortOptions = () => sortOptionsList;
 
 export { getSortOptions, sortOptionsList };
