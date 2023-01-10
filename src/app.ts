@@ -6,8 +6,9 @@ import sanitize from 'express-mongo-sanitize';
 import { connectToMongoDb, CORS, isLambdaRuntime } from './commons';
 import healthRoutes from './routes/health.routes';
 import movieRoutes from './routes/movie.routes';
-import genresRoutes from './routes/genres.routes'
-import sortOptionRoutes from './routes/sort-options.routes'
+import genresRoutes from './routes/genres.routes';
+import sortOptionRoutes from './routes/sort-options.routes';
+import singUp from './routes/sing-up.router';
 
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use('/health', healthRoutes);
 app.use('/movies', movieRoutes);
 app.use('/genres', genresRoutes);
 app.use('/sort-options', sortOptionRoutes);
+app.use('/sing-up', singUp)
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
