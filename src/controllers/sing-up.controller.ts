@@ -1,5 +1,6 @@
 import express from 'express';
 import { validationResult } from 'express-validator';
+import { sha256 } from 'js-sha256';
 import { User } from '../models/user';
 
 const singUp = async (_req: express.Request, res: express.Response) => {
@@ -9,7 +10,8 @@ const singUp = async (_req: express.Request, res: express.Response) => {
   };
 
   const userObject = _req.body;
-  const user = await User.create(userObject);
+  userObject.password = sha256(userObject.password);
+  await User.create(userObject);
   res.sendStatus(201);
 };
 
