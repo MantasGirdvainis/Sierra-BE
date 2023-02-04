@@ -1,4 +1,4 @@
-import sortOptionvalidate from "../../src/commons/sort-option.validator";
+import sortOptionvalidate from "../../src/validators/sort-option.validator";
 
 describe('Sort Option validator', () => {
     it('should be valid', () => {

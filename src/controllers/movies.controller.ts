@@ -1,7 +1,7 @@
 import express from 'express';
-import validate from '../commons/title.validator';
-import genresValidator from '../commons/genres.validator';
-import sortOptionvalidate from '../commons/sort-option.validator';
+import validate from '../validators/title.validator';
+import genresValidator from '../validators/genres.validator';
+import sortOptionvalidate from '../validators/sort-option.validator';
 
 import * as movieService from '../services/movie.service';
 

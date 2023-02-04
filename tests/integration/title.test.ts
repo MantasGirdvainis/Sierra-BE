@@ -1,4 +1,4 @@
-import validate from "../../src/commons/title.validator";
+import validate from "../../src/validators/title.validator";
 
 describe('Title Validator', () => {
   it('should be valid', () => {
