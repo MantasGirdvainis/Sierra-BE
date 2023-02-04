@@ -1,4 +1,4 @@
-import genresValidator from "../../src/commons/genres.validator";
+import genresValidator from "../../src/validators/genres.validator";
 
 describe('Genres Validator', () => {
   it('should be valid', () => {

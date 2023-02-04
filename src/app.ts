@@ -8,7 +8,7 @@ import healthRoutes from './routes/health.routes';
 import movieRoutes from './routes/movie.routes';
 import genresRoutes from './routes/genres.routes';
 import sortOptionRoutes from './routes/sort-options.routes';
-import singUp from './routes/sing-up.router';
+import signUp from './routes/security.routes';
 
 
 dotenv.config();
@@ -28,7 +28,7 @@ app.use('/health', healthRoutes);
 app.use('/movies', movieRoutes);
 app.use('/genres', genresRoutes);
 app.use('/sort-options', sortOptionRoutes);
-app.use('/sing-up', singUp)
+app.use('/sign-up', signUp)
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);

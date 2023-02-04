@@ -1,12 +1,12 @@
 import express from 'express';
-import singUpRules from '../commons/user.validator';
+import  { signUpRules } from '../validators/user.validator';
 import { validate } from '../commons/index';
 
 
-import singUp from '../controllers/sing-up.controller';
+import singUp from '../controllers/sign-up.controller';
 
 const router = express.Router();
 
-router.route('/sing-up').post(validate(singUpRules), singUp);
+router.route('/').post(validate(signUpRules), singUp);
 
 export default router;

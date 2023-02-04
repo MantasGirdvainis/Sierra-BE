@@ -2,7 +2,7 @@ import { body } from 'express-validator';
 import { User } from '../models/user';
 
 
-const usersSchema = [
+const signUpRules = [
   body('name').isString().not().isEmpty().isLength({ min: 5, max: 50 }),
   body('email').isEmail().not().isEmpty().custom((email) => new Promise(
     (resolve, reject) => {
@@ -17,7 +17,7 @@ const usersSchema = [
         .catch((err) => reject(err));
     },
   )),
-  body('password').isLength({ min: 8 }).not().isEmpty().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  body('password').not().isEmpty().matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
 ];
 
-export default usersSchema;
+export { signUpRules };
