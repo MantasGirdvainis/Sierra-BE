@@ -13,15 +13,19 @@ const signUp = async (req: express.Request, res: express.Response) => {
   };
 };
 
-const userLogin = (req: express.Request, res: express.Response) => {
+const userLogin = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
 
   const userLogin: UserLogin = req.body;
 
-  if (userLogin) {
+ 
+  try {
+    res.json( await login(userLogin))
 
-    res.json(login(userLogin));
-    
-  };
+  } catch (err) {
+
+    next(err)
+  }
+
 };
 
 export { signUp, userLogin }
