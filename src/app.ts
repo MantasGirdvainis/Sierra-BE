@@ -9,6 +9,7 @@ import movieRoutes from './routes/movie.routes';
 import genresRoutes from './routes/genres.routes';
 import sortOptionRoutes from './routes/sort-options.routes';
 import securityRoutes from './routes/security.routes';
+import personelMovie from './routes/personal-movie.routes';
 
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/movies', movieRoutes);
 app.use('/genres', genresRoutes);
 app.use('/sort-options', sortOptionRoutes);
 app.use('/', securityRoutes);
+app.use('/personal-movies', personelMovie);
 
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
