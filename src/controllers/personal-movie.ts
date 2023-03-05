@@ -1,6 +1,8 @@
 import express from 'express';
 import * as personalMovieService from '../services/personal-movie.service';
 
+const getPageNumber = (req: express.Request): number => (req.query.page ? parseInt(req.query.page as string) || 1 : 1);
+
 const savePersonalMovie = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
 
     try {
@@ -19,8 +21,7 @@ const savePersonalMovie = async (req: express.Request, res: express.Response, ne
 const getPersonalMovies = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
 
     try {
-        let page: number = parseInt(req.query.page as string);
-        res.json(await personalMovieService.getPersonalMovies(req.currentUserEmail, page))
+        res.json(await personalMovieService.getPersonalMovies(req.currentUserEmail, getPageNumber(req)));
 
     } catch (err) {
         next(err)
