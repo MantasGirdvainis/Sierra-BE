@@ -16,5 +16,16 @@ const savePersonalMovie = async (req: express.Request, res: express.Response, ne
     }
 };
 
-export { savePersonalMovie };
+const getPersonalMovies = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+
+    try {
+        let page: number = parseInt(req.query.page as string);
+        res.json(await personalMovieService.getPersonalMovies(req.currentUserEmail, page))
+
+    } catch (err) {
+        next(err)
+    };
+};
+
+export { savePersonalMovie, getPersonalMovies };
 
