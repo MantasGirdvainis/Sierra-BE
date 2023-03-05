@@ -6,4 +6,11 @@ const savePersonalMovie = async (movie: Movie) => {
     return result;
 };
 
-export { savePersonalMovie };
+const deletePersonalMovie = async (id: string, email: string) => {
+
+    await MovieModel.deleteOne({ _id: id, email });
+
+    return true;
+};
+
+export { savePersonalMovie, deletePersonalMovie };
