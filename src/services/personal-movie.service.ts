@@ -19,6 +19,14 @@ const getPersonalMovies = async (userEmail: string, page: number) => {
         movies: docs,
         totalPages: totalPages
     }
-}
+};
 
-export { savePersonalMovie, getPersonalMovies };
+const deletePersonalMovie = async (id: string, email: string) => {
+
+    await MovieModel.deleteOne({ _id: id, email });
+
+    return true;
+};
+
+export { savePersonalMovie, deletePersonalMovie, getPersonalMovies };
+

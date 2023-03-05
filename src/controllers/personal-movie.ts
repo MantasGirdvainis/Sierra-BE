@@ -18,6 +18,7 @@ const savePersonalMovie = async (req: express.Request, res: express.Response, ne
     }
 };
 
+
 const getPersonalMovies = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
 
     try {
@@ -28,5 +29,16 @@ const getPersonalMovies = async (req: express.Request, res: express.Response, ne
     };
 };
 
-export { savePersonalMovie, getPersonalMovies };
+
+const deletePersonalMovie = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+    try {
+       const result = (await personalMovieService.deletePersonalMovie(req.params.id, req.currentUserEmail))
+        res.json({ success: result })
+        
+    } catch (err) {
+        next(err);
+    }
+};
+
+export { savePersonalMovie, deletePersonalMovie, getPersonalMovies };
 
