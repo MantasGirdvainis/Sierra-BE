@@ -1,18 +1,17 @@
 import axios from "axios";
 
-let genresCache: Genre;
+let genres: Genre[] = [];
 
-const getGenres = async (): Promise<Genre> => {
-   
-    if (!genresCache) {
+const loadGenres = async (): Promise<Genre[]> => {
+  if (genres.length === 0) {
+    const { data } = await axios.get<Genres>(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`,
+    );
 
-        const { data } =  await axios.get<Genre>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`);
-        genresCache = data
+    genres = data.genres;
+  }
 
-    };
-
-    return genresCache
-
+  return genres;
 };
 
-export { getGenres };
+export { loadGenres };
